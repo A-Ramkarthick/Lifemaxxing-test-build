@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-nokia-bg: #050a04;
+  --color-nokia-screen: #101f0e;
+  --color-nokia-primary: #78e02f;
+  --color-nokia-dim: #3a5c20;
+  --color-nokia-highlight: #253b16;
+  
+  --font-vt323: var(--font-vt323);
+  
+  --animate-blink: blink 1s step-end infinite;
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+}
+
+:root {
+  --background: #050a04;
+  --foreground: #78e02f;
+  
+  --font-vt323: 'VT323', monospace;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-vt323);
+  /* Nokia LCD Grid Texture */
+  background-image: 
+    linear-gradient(rgba(16, 31, 14, 0.9) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 31, 14, 0.9) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+@layer utilities {
+  .nokia-border {
+    border: 2px solid var(--color-nokia-dim);
+    border-radius: 4px;
+    box-shadow: 0 4px 0 var(--color-nokia-dim);
+  }
+  
+  .nokia-border-active {
+    border-color: var(--color-nokia-primary);
+    box-shadow: 0 4px 0 var(--color-nokia-primary);
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--color-nokia-primary);
+  }
+}
+
+/* Custom Scrollbar for the retro feel */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-nokia-bg);
+  border-left: 1px solid var(--color-nokia-dim);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-nokia-dim);
+  border: 2px solid var(--color-nokia-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-nokia-primary);
+}
