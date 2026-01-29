@@ -12,7 +12,8 @@ import {
   Brain,
   BookOpen,
   ChevronRight,
-  Battery
+  Battery,
+  LucideIcon
 } from 'lucide-react';
 import NokiaLayout from '@/components/layout/NokiaLayout';
 import { cn } from '@/lib/utils';
@@ -20,7 +21,7 @@ import { cn } from '@/lib/utils';
 interface AgentItem {
   id: string;
   label: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
   href: string;
   desc: string;
 }
@@ -75,7 +76,7 @@ export default function DashboardPage() {
                   "p-2 rounded-sm border-2 transition-colors",
                   isSelected ? "border-nokia-bg bg-nokia-bg text-nokia-primary" : "border-nokia-dim bg-nokia-dim/10"
                 )}>
-                  <agent.icon className="w-6 h-6" strokeWidth={2.5} />
+                  {React.createElement(agent.icon, { className: "w-6 h-6", strokeWidth: 2.5 })}
                 </div>
                 
                 <span className={cn(
