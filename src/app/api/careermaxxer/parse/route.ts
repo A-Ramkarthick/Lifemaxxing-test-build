@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import * as pdfParse from 'pdf-parse';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   try {
@@ -15,7 +17,8 @@ export async function POST(req: Request) {
     const arrayBuffer = await fileRes.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // 2. Extract Text
+    // 2. Extract Text with dynamic import
+    const pdfParse = (await import('pdf-parse')).default;
     const pdfData = await pdfParse(buffer);
     const text = pdfData.text.slice(0, 30000); // Limit context window
 

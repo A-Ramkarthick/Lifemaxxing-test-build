@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/nodemailer';
 import { supabase } from '@/lib/supabase';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 // This simple generate function is for demo; use crypto in production
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
