@@ -26,7 +26,8 @@ export default function SignInPage() {
 
       if (error) throw error;
 
-      router.push('/dashboard');
+      // Force a hard navigation to ensure middleware picks up the session
+      window.location.href = '/dashboard';
     } catch (err: any) {
       setError(err.message);
     } finally {
