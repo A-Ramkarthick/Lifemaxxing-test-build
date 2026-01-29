@@ -18,8 +18,8 @@ export async function POST(req: Request) {
     const buffer = Buffer.from(arrayBuffer);
 
     // 2. Extract Text with dynamic import
-    const pdfParse = (await import('pdf-parse')).default;
-    const pdfData = await pdfParse(buffer);
+    const pdfParse = await import('pdf-parse');
+    const pdfData = await (pdfParse as any)(buffer);
     const text = pdfData.text.slice(0, 30000); // Limit context window
 
     const systemPrompt = `
