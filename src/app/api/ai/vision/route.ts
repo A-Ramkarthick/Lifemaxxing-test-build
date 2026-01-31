@@ -15,7 +15,9 @@ export async function POST(req: Request) {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://lifemaxxing-test-build.vercel.app",
+        "X-Title": "LifeMaxxing"
       },
       body: JSON.stringify({
         "model": "google/gemma-3n-e2b-it:free",

@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       headers: {
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://lifemaxxing.app", 
+        "HTTP-Referer": "https://lifemaxxing-test-build.vercel.app", 
         "X-Title": "LifeMaxxing"
       },
       body: JSON.stringify({
