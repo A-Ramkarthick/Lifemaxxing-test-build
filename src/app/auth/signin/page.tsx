@@ -30,8 +30,8 @@ export default function SignInPage() {
         throw new Error('No session created');
       }
 
-      // Wait a moment for session to be stored in localStorage
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Wait for cookies to be set properly
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Verify session is accessible
       const { data: { session } } = await supabase.auth.getSession();
