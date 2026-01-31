@@ -25,12 +25,26 @@ export default function SignInPage() {
       });
 
       if (error) throw error;
+      
+      if (!data.session) {
+        throw new Error('No session created');
+      }
 
-      // Force a hard navigation to ensure middleware picks up the session
-      window.location.href = '/dashboard';
+      // Wait a moment for session to be stored in localStorage
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Verify session is accessible
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session) {
+        // Force a hard navigation to ensure middleware picks up the session
+        window.location.href = '/dashboard';
+      } else {
+        throw new Error('Session not persisted');
+      }
     } catch (err: any) {
-      setError(err.message);
-    } finally {
+      console.error('Sign-in error:', err);
+      setError(err.message || 'Failed to sign in');
       setLoading(false);
     }
   };

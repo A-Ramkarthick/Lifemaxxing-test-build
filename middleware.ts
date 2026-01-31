@@ -58,6 +58,11 @@ export async function middleware(request: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession()
 
+  // Add cache control headers for all responses
+  response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  response.headers.set('Pragma', 'no-cache');
+  response.headers.set('Expires', '0');
+
   // Protect Dashboard and Agent routes
   const protectedPaths = ['/dashboard', '/finmaxxer', '/habitmaxxer', '/mindmaxxer', '/looksmaxxer', '/careermaxxer', '/studymaxxer', '/rizzmaxxer'];
   const isProtected = protectedPaths.some(path => request.nextUrl.pathname.startsWith(path));
@@ -67,7 +72,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Redirect to dashboard if logged in and visiting auth pages
-  const authPaths = ['/auth/signin', '/auth/signup'];
+  const authPaths = ['/auth/signin', '/auth/signup', '/auth/forgot-password'];
   if (authPaths.some(path => request.nextUrl.pathname.startsWith(path)) && session) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
